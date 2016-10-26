@@ -14,6 +14,19 @@
 ## 注意
 >如果设备使用USB连接到电脑后，adb devices 没有显示出设备， 则需要在手机上打开 USB调试功能。
 
+
+### 比较耗时的操作
+```java
+//创建这个对象,比较耗时,大概需要2s,因此默认只刚开始创建改对象,然后保存起来,不一直创建
+IChimpDevice chimpDevice = new AdbChimpDevice(dev);
+```
+
+```java
+//这个截屏的操作也比较耗时,大概需要 1~3s, 不固定
+RawImage rawImage = device.getScreenshot();
+```
+
+
 ## 使用说明
 一、下载代码
 ```shell
