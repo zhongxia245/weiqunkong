@@ -7,8 +7,8 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="15eaf" binding="pLeft" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-        <constraints border-constraint="West"/>
+      <grid id="15eaf" binding="pTop" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="North"/>
         <properties>
           <maximumSize width="100" height="32767"/>
           <minimumSize width="100" height="10"/>
@@ -69,6 +69,22 @@
           </grid>
         </children>
       </scrollpane>
+      <grid id="c0ad6" binding="panelTable" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="West"/>
+        <properties>
+          <preferredSize width="150" height="24"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="6b35c" class="javax.swing.JLabel">
+            <constraints border-constraint="North"/>
+            <properties>
+              <horizontalAlignment value="0"/>
+              <text value="设备列表"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>

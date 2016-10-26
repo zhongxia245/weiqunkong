@@ -2,7 +2,6 @@ package com.lenovo.Form;
 
 import com.android.ddmlib.IDevice;
 import com.android.ddmlib.RawImage;
-import com.lenovo.ScreenCapture.OperateAndroid;
 
 import javax.swing.*;
 import java.awt.*;

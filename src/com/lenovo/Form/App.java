@@ -2,11 +2,11 @@ package com.lenovo.Form;
 
 import com.android.ddmlib.AndroidDebugBridge;
 import com.android.ddmlib.IDevice;
-import com.lenovo.ScreenCapture.MainWindow;
 import com.lenovo.ScreenCapture.OperateAndroid;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -21,9 +21,10 @@ public class App {
   private JButton btnBack;
   private JButton btnMenu;
   private JPanel panelDevices;
-  private JPanel pLeft;
+  private JPanel pTop;
   private JScrollPane spMain;
   private JButton btnControl;
+  private JPanel panelTable;
 
   private static IDevice[] devices;  //所有的设备数组
   private static ArrayList<JLabel> deviceList = new ArrayList(100);//所有展示设备屏幕截图的组件
@@ -35,6 +36,7 @@ public class App {
   public App() {
     bindEvent();
     devices = getDevices();
+    initList(devices);
   }
 
   public static void main(String[] args) {
@@ -44,6 +46,21 @@ public class App {
     frame.pack();
     frame.setSize(800, 600);
     frame.setVisible(true);
+  }
+
+  /**
+   * 初始化设备列表
+   */
+  public void initList(IDevice[] devices) {
+    if (devices != null) {
+      ArrayList<Object> listData = new ArrayList<>();
+      for (int i = 0; i < devices.length; i++) {
+        listData.add(devices[i].getName());
+      }
+      JList<Object> list = new JList<>();
+      list.setListData(listData.toArray());
+      panelTable.add(list);
+    }
   }
 
   /**
