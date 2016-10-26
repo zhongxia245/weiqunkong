@@ -31,12 +31,13 @@ public class OperateAndroid {
    * @param dev 通过adb返回的device对象
    */
   public OperateAndroid(IDevice dev) {
+    long start = System.currentTimeMillis();
     if (device == null) {
       IChimpDevice chimpDevice = new AdbChimpDevice(dev);
       device = (AdbChimpDevice) chimpDevice;
       manager = device.getManager();
-
     }
+    long end = System.currentTimeMillis();
   }
 
   /**

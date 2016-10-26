@@ -5,8 +5,9 @@ import com.android.ddmlib.IDevice;
 import com.lenovo.ScreenCapture.OperateAndroid;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -26,18 +27,14 @@ public class App {
   private JButton btnControl;
   private JPanel panelTable;
 
-  private static IDevice[] devices;  //所有的设备数组
-  private static ArrayList<JLabel> deviceList = new ArrayList(100);//所有展示设备屏幕截图的组件
-  private static ArrayList<OperateAndroid> oaList = new ArrayList(100);//所有展示设备屏幕截图的组件
+  private static IDevice[] devices = null;  //所有的设备数组
+  private static ArrayList<OperateAndroid> oas = null; //保存所有的Android操作对象[创建这个对象挺耗时间,因此只创建一次]
+  private ControlPage cp = null;
 
-  /**
-   * 构造函数
-   */
-  public App() {
-    bindEvent();
-    devices = getDevices();
-    initList(devices);
-  }
+  //设备屏幕截图的宽高
+  final int imgWidth = 270;
+  final int imgHeight = 480;
+
 
   public static void main(String[] args) {
     JFrame frame = new JFrame("App");
@@ -46,6 +43,16 @@ public class App {
     frame.pack();
     frame.setSize(800, 600);
     frame.setVisible(true);
+  }
+
+  /**
+   * 构造函数
+   */
+  public App() {
+    bindEvent();
+    devices = getDevices();
+    oas = getOperateAndroid(devices);
+    initList(devices);
   }
 
   /**
@@ -71,7 +78,9 @@ public class App {
     btnWX.addMouseListener(new ZxMouseListener() {
       @Override
       public void mousePressed(MouseEvent e) {
-        oaList.get(0).openWeiXin();
+        for (OperateAndroid oa : oas) {
+          oa.openWeiXin();
+        }
       }
     });
 
@@ -79,15 +88,24 @@ public class App {
     btnControl.addMouseListener(new ZxMouseListener() {
       @Override
       public void mousePressed(MouseEvent e) {
-        JFrame frame = new JFrame("操作页面");
-        ControlPage cp = new ControlPage(devices[0]);
-        frame.setContentPane(cp.panel1);
-        frame.setSize(cp.panel1.getWidth(), cp.panel1.getHeight() + 20);
-        frame.setVisible(true);
+        if (cp == null) {
+          JFrame frame = new JFrame("操作页面");
+          cp = new ControlPage(devices[0], oas.get(0));
+          frame.setContentPane(cp.panel1);
+          frame.setSize(cp.panel1.getWidth(), cp.panel1.getHeight() + 20);
+          frame.setVisible(true);
+          frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+              System.out.println("关闭操作设备的窗口");
+              cp.stopThread();
+              cp = null;
+            }
+          });
+        }
       }
     });
 
-    //连接设备
+    //显示屏幕
     btnConnect.addMouseListener(new ZxMouseListener() {
       @Override
       public void mousePressed(MouseEvent e) {
@@ -106,15 +124,8 @@ public class App {
     btnHome.addMouseListener(new ZxMouseListener() {
       @Override
       public void mousePressed(MouseEvent e) {
-        for (OperateAndroid oa : oaList) {
-          if (oa != null) {
-            try {
-              oa.press(OperateAndroid.HOME);
-            } catch (Exception ev) {
-              System.out.println("按home键报错");
-              ev.printStackTrace();
-            }
-          }
+        for (OperateAndroid oa : oas) {
+          oa.press(OperateAndroid.HOME);
         }
       }
     });
@@ -123,15 +134,8 @@ public class App {
     btnBack.addMouseListener(new ZxMouseListener() {
       @Override
       public void mousePressed(MouseEvent e) {
-        for (OperateAndroid oa : oaList) {
-          if (oa != null) {
-            try {
-              oa.press(OperateAndroid.BACK);
-            } catch (Exception ev) {
-              System.out.println("按back键报错");
-              ev.printStackTrace();
-            }
-          }
+        for (OperateAndroid oa : oas) {
+          oa.press(OperateAndroid.BACK);
         }
       }
     });
@@ -140,15 +144,8 @@ public class App {
     btnMenu.addMouseListener(new ZxMouseListener() {
       @Override
       public void mousePressed(MouseEvent e) {
-        for (OperateAndroid oa : oaList) {
-          if (oa != null) {
-            try {
-              oa.press(OperateAndroid.MENU);
-            } catch (Exception ev) {
-              System.out.println("按menu键报错");
-              ev.printStackTrace();
-            }
-          }
+        for (OperateAndroid oa : oas) {
+          oa.press(OperateAndroid.MENU);
         }
       }
     });
@@ -168,7 +165,6 @@ public class App {
       adbLocation = "adb";
     }
 
-    AndroidDebugBridge.terminate();
     AndroidDebugBridge.init(false);
     AndroidDebugBridge bridge = AndroidDebugBridge.createBridge(adbLocation, true);
 
@@ -204,17 +200,11 @@ public class App {
   public void initDevices(IDevice[] devices) {
     //获取连接的设备列表,然后动态生成到设备列表中
     for (IDevice d : devices) {
-      OperateAndroid oa = new OperateAndroid(d);
-
       JLabel label = new JLabel();
-      label.setSize(270, 480);
+      label.setSize(imgWidth, imgHeight);
       label.setToolTipText(d.getName());
 
       panelDevices.add(label);
-
-      deviceList.add(label);
-      oaList.add(oa);
-
       initDeviceImage(label, d);
     }
   }
@@ -230,5 +220,19 @@ public class App {
     if (!it.isAlive()) {
       it.start();
     }
+  }
+
+  /**
+   * 获取操作Android设备的对象
+   *
+   * @param devices
+   * @return
+   */
+  public ArrayList<OperateAndroid> getOperateAndroid(IDevice[] devices) {
+    ArrayList<OperateAndroid> oas = new ArrayList<>();
+    for (IDevice d : devices) {
+      oas.add(new OperateAndroid(d));
+    }
+    return oas;
   }
 }

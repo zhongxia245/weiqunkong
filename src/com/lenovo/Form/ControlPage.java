@@ -18,17 +18,28 @@ public class ControlPage extends JFrame {
   private double zoom = 2.5;
   private int width = (int) (1080 / zoom);
   private int height = (int) (1920 / zoom);
+  private ImageThread it = null;
 
-  public ControlPage(IDevice device) throws HeadlessException {
+  public ControlPage(IDevice device, OperateAndroid _oa) throws HeadlessException {
     _device = device;
-    oa = new OperateAndroid(device);
+    oa = _oa;
     panel1.setSize(width, height);
     initEvent();
 
-    ImageThread it = new ImageThread(lblImage, device, width, height);
+    it = new ImageThread(lblImage, device, width, height);
 
     if (!it.isAlive()) {
       it.start();
+    }
+  }
+
+  /**
+   * 停止线程
+   */
+  public void stopThread() {
+    if (it != null && it.isAlive()) {
+      it.stop();
+      System.out.println("中断操作设备的线程!");
     }
   }
 
@@ -88,10 +99,8 @@ public class ControlPage extends JFrame {
     });
 
     this.addKeyListener(new KeyListener() {
-
       @Override
       public void keyTyped(KeyEvent e) {
-
       }
 
       @Override

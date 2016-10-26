@@ -42,6 +42,7 @@ public class ImageThread extends Thread {
     _height = height;
   }
 
+
   @Override
   public void run() {
     super.run();
@@ -53,8 +54,9 @@ public class ImageThread extends Thread {
         _label.setIcon(image);
       }
     } catch (Exception e) {
-      System.out.println("获取屏幕截图异常!设备名称:" + _device.getName());
+      System.out.println("中断线程");
     }
+
   }
 
   /**
@@ -70,7 +72,8 @@ public class ImageThread extends Thread {
       RawImage rawImage = device.getScreenshot();
 
       long end = System.currentTimeMillis();
-      System.out.println("获取设备屏幕的时间" + (end - start) + "毫秒");
+
+      System.out.println("获取设备屏幕的时间:" + device.getName() + "=>" + (end - start) + "毫秒");
 
 //      BufferedImage image = new BufferedImage(rawImage.width, rawImage.height, BufferedImage.TYPE_INT_RGB);
       BufferedImage image = new BufferedImage(rawImage.width, rawImage.height, BufferedImage.SCALE_SMOOTH);
@@ -87,7 +90,7 @@ public class ImageThread extends Thread {
       return new ImageIcon(image);
 
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println("获取屏幕截图异常!设备名称:" + device.getName() + ",可能情况,中断了线程!");
     }
     return null;
   }
