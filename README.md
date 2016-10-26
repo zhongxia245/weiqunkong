@@ -9,7 +9,7 @@
 4. 添加设备列表
 5. 选择某一个设备，群控所有连接到电脑的设备
 6. 【TODO】录制脚本功能
-7. 【TODO】BUG冲突解决
+7. 【TODO】BUG冲突解决(broken pipe , monkey --port 12345 这两个主要BUG)
 
 ## 注意
 >如果设备使用USB连接到电脑后，adb devices 没有显示出设备， 则需要在手机上打开 USB调试功能。
