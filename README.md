@@ -53,6 +53,11 @@ App 上可以投射多个设备的屏幕截图，但是目前操作功能，只�
 ![](http://ww2.sinaimg.cn/large/801b780agw1f93s7ar9iaj20tp0fegp1.jpg)
 
 ## 目前效果图
+2016-10-26 14:42:45
+新增设备列表,单独操作设备的窗口
+![](http://ww4.sinaimg.cn/large/801b780ajw1f95o0k7e0ng213l0mlnpd.gif)
+
+2016-10-24 14:42:49
 ![](http://ww3.sinaimg.cn/large/801b780agw1f93rxty21sg20mn0gt49u.gif)
 
 
