@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.lenovo.Form.App">
+  <grid id="27dc6" binding="pApp" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="1072" height="709"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="15eaf" binding="pLeft" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="West"/>
+        <properties>
+          <maximumSize width="100" height="32767"/>
+          <minimumSize width="100" height="10"/>
+          <preferredSize width="100" height="42"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="f77d8" class="javax.swing.JButton" binding="btnWX">
+            <constraints/>
+            <properties>
+              <text value="打开微信"/>
+            </properties>
+          </component>
+          <component id="7ddc9" class="javax.swing.JButton" binding="btnConnect">
+            <constraints/>
+            <properties>
+              <enabled value="true"/>
+              <text value="连接全部"/>
+              <verticalAlignment value="1"/>
+            </properties>
+          </component>
+          <component id="8ceb8" class="javax.swing.JButton" binding="btnHome">
+            <constraints/>
+            <properties>
+              <text value="HOME"/>
+            </properties>
+          </component>
+          <component id="6be3c" class="javax.swing.JButton" binding="btnBack">
+            <constraints/>
+            <properties>
+              <text value="BACK"/>
+            </properties>
+          </component>
+          <component id="86489" class="javax.swing.JButton" binding="btnMenu">
+            <constraints/>
+            <properties>
+              <text value="MENU"/>
+            </properties>
+          </component>
+          <component id="588f0" class="javax.swing.JButton" binding="btnControl">
+            <constraints/>
+            <properties>
+              <text value="群控设备"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <scrollpane id="f8f92" binding="spMain">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="b0f1" binding="panelDevices" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </scrollpane>
+    </children>
+  </grid>
+</form>

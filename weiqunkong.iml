@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/lib/chimpchat.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/ddmlib.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/guavalib.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/monkeyrunner.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/sdklib.jar!/" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="chimpchat.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/chimpchat.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/SKiran/Desktop/aster" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ddmlib.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/ddmlib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Users/SKiran/Desktop/aster" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="guavalib.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/guavalib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="monkeyrunner.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/monkeyrunner.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="sdklib.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/sdklib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
