@@ -73,9 +73,8 @@ public class ImageThread extends Thread {
 
       long end = System.currentTimeMillis();
 
-      System.out.println("获取设备屏幕的时间:" + device.getName() + "=>" + (end - start) + "毫秒");
+//      System.out.println("获取设备屏幕的时间:" + device.getName() + "=>" + (end - start) + "毫秒");
 
-//      BufferedImage image = new BufferedImage(rawImage.width, rawImage.height, BufferedImage.TYPE_INT_RGB);
       BufferedImage image = new BufferedImage(rawImage.width, rawImage.height, BufferedImage.SCALE_SMOOTH);
 
       int index = 0;

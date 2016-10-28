@@ -26,6 +26,8 @@ public class App {
   private JScrollPane spMain;
   private JButton btnControl;
   private JPanel panelTable;
+  private JButton btnCommand;
+  private JTextField txtCommand;
 
   private static IDevice[] devices = null;  //所有的设备数组
   private static ArrayList<OperateAndroid> oas = null; //保存所有的Android操作对象[创建这个对象挺耗时间,因此只创建一次]
@@ -75,6 +77,17 @@ public class App {
    */
   public void bindEvent() {
     //打开微信
+    btnCommand.addMouseListener(new ZxMouseListener() {
+      @Override
+      public void mousePressed(MouseEvent e) {
+        String shell = txtCommand.getText();
+        for (OperateAndroid oa : oas) {
+          oa.shell(shell.trim());
+        }
+      }
+    });
+
+    //打开微信
     btnWX.addMouseListener(new ZxMouseListener() {
       @Override
       public void mousePressed(MouseEvent e) {
@@ -92,7 +105,7 @@ public class App {
           JFrame frame = new JFrame("操作页面");
           cp = new ControlPage(devices[0], oas.get(0));
           frame.setContentPane(cp.panel1);
-          frame.setSize(cp.panel1.getWidth(), cp.panel1.getHeight() + 20);
+          frame.setSize(cp.lblImage.getWidth() + 300, cp.lblImage.getHeight() + 20);
           frame.setVisible(true);
           frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -229,10 +242,13 @@ public class App {
    * @return
    */
   public ArrayList<OperateAndroid> getOperateAndroid(IDevice[] devices) {
+    long start = System.currentTimeMillis();
     ArrayList<OperateAndroid> oas = new ArrayList<>();
     for (IDevice d : devices) {
       oas.add(new OperateAndroid(d));
     }
+    long end = System.currentTimeMillis();
+    System.out.println("构建OperatorAndroid对象耗时:" + (end - start) + "毫秒");
     return oas;
   }
 }

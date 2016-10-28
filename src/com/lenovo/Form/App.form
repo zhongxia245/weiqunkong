@@ -54,6 +54,19 @@
               <text value="群控设备"/>
             </properties>
           </component>
+          <component id="f6eb5" class="javax.swing.JButton" binding="btnCommand">
+            <constraints/>
+            <properties>
+              <label value="执行"/>
+              <text value="执行"/>
+            </properties>
+          </component>
+          <component id="8cfbd" class="javax.swing.JTextField" binding="txtCommand">
+            <constraints/>
+            <properties>
+              <preferredSize width="100" height="24"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <scrollpane id="f8f92" binding="spMain">

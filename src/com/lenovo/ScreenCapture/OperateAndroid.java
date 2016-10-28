@@ -6,6 +6,7 @@ import com.android.chimpchat.core.IChimpDevice;
 import com.android.chimpchat.core.TouchPressType;
 import com.android.ddmlib.IDevice;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -52,6 +53,20 @@ public class OperateAndroid {
       oa = new OperateAndroid(dev);
     }
     return oa;
+  }
+
+  /**
+   * 执行命令
+   *
+   * @param str
+   */
+  public void shell(String str) {
+    try {
+      manager.sendMonkeyEvent(str);
+    } catch (IOException e) {
+      System.out.println("执行命令:" + str + " ,异常!");
+    }
+
   }
 
   /**
